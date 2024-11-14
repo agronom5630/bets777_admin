@@ -16,16 +16,12 @@ export const CardAgents = () => {
         <div className="flex gap-2.5 justify-center">
           <div className="flex flex-col border-dashed border-2 border-divider py-2 px-6 rounded-xl">
             <span className="text-default-900 text-xl font-semibold">
-              {" "}
-              {"⭐"}Agents
+              {"⭐"} Admins List
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-6 flex-col">
-          <span className="text-xs">
-            Meet your agenda and see their ranks to get the best results
-          </span>
           <AvatarGroup isBordered>
             <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />

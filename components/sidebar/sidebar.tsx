@@ -19,6 +19,10 @@ import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
 import { usePathname } from "next/navigation";
+import { LevelsIcon } from "../icons/sidebar/levels-icon";
+import { TasksIcon } from "../icons/sidebar/tasks-icon";
+import { BoostIcon } from "../icons/sidebar/boost-icon";
+import { ReferralsIcon } from "../icons/sidebar/referrals-icon";
 
 export const SidebarWrapper = () => {
   const pathname = usePathname();
@@ -45,51 +49,56 @@ export const SidebarWrapper = () => {
               isActive={pathname === "/"}
               href="/"
             />
-            <SidebarMenu title="Main Menu">
+            <SidebarMenu title="@Bets_777_bot">
               <SidebarItem
-                isActive={pathname === "/accounts"}
-                title="Accounts"
+                isActive={pathname === "/players"}
+                title="Players"
                 icon={<AccountsIcon />}
-                href="accounts"
+                href="players"
               />
+
               <SidebarItem
-                isActive={pathname === "/payments"}
-                title="Payments"
-                icon={<PaymentsIcon />}
+                isActive={pathname === "/levels"}
+                title="Levels"
+                icon={<LevelsIcon />}
+                href="levels"
               />
-              <CollapseItems
-                icon={<BalanceIcon />}
-                items={["Banks Accounts", "Credit Cards", "Loans"]}
-                title="Balances"
-              />
+
               <SidebarItem
-                isActive={pathname === "/customers"}
-                title="Customers"
-                icon={<CustomersIcon />}
+                isActive={pathname === "/tasks"}
+                title="Tasks"
+                icon={<TasksIcon />}
+                href="tasks"
               />
+
               <SidebarItem
-                isActive={pathname === "/products"}
-                title="Products"
-                icon={<ProductsIcon />}
+                isActive={pathname === "/boosts"}
+                title="Boosts"
+                icon={<BoostIcon />}
+                href="boosts"
               />
+
               <SidebarItem
-                isActive={pathname === "/reports"}
-                title="Reports"
-                icon={<ReportsIcon />}
+                isActive={pathname === "/referrals"}
+                title="Referrals"
+                icon={<ReferralsIcon />}
+                href="referrals"
               />
             </SidebarMenu>
 
-            <SidebarMenu title="General">
+            <SidebarMenu title="My Bots">
               <SidebarItem
-                isActive={pathname === "/developers"}
-                title="Developers"
+                isActive={pathname === "/senders"}
+                title="Senders"
                 icon={<DevIcon />}
               />
+
               <SidebarItem
                 isActive={pathname === "/view"}
-                title="View Test Data"
+                title="View Data"
                 icon={<ViewIcon />}
               />
+
               <SidebarItem
                 isActive={pathname === "/settings"}
                 title="Settings"
@@ -97,15 +106,15 @@ export const SidebarWrapper = () => {
               />
             </SidebarMenu>
 
-            <SidebarMenu title="Updates">
+            {/* <SidebarMenu title="Updates">
               <SidebarItem
                 isActive={pathname === "/changelog"}
                 title="Changelog"
                 icon={<ChangeLogIcon />}
               />
-            </SidebarMenu>
+            </SidebarMenu> */}
           </div>
-          <div className={Sidebar.Footer()}>
+          {/* <div className={Sidebar.Footer()}>
             <Tooltip content={"Settings"} color="primary">
               <div className="max-w-fit">
                 <SettingsIcon />
@@ -122,7 +131,7 @@ export const SidebarWrapper = () => {
                 size="sm"
               />
             </Tooltip>
-          </div>
+          </div> */}
         </div>
       </div>
     </aside>

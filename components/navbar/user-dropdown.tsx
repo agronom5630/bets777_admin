@@ -9,8 +9,16 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { DarkModeSwitch } from "./darkmodeswitch";
+import { useAdmin } from "@/app/context/adminProvider";
+import { useRouter } from 'next/navigation';
 
 export const UserDropdown = () => {
+  const { role, email, username, logout } = useAdmin();
+  const router = useRouter();
+  const handleLogout = () => {
+    logout();
+    router.push('/login');
+  };
   return (
     <Dropdown>
       <NavbarItem>
@@ -19,32 +27,38 @@ export const UserDropdown = () => {
             as="button"
             color="secondary"
             size="md"
-            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            src="/images/ninja.jpg"
           />
         </DropdownTrigger>
       </NavbarItem>
+
       <DropdownMenu
         aria-label="User menu actions"
         onAction={(actionKey) => console.log({ actionKey })}
       >
         <DropdownItem
           key="profile"
-          className="flex flex-col justify-start w-full items-start"
+          className="flex flex-col justify-center w-full items-center"
         >
-          <p>Signed in as</p>
-          <p>zoey@example.com</p>
+          <p className="text-center">Signed in as <span className="italic text-blue-700"> {username}</span></p>
+          <p className="italic text-green-600">{email}</p>
         </DropdownItem>
-        <DropdownItem key="settings">My Settings</DropdownItem>
-        <DropdownItem key="team_settings">Team Settings</DropdownItem>
-        <DropdownItem key="analytics">Analytics</DropdownItem>
-        <DropdownItem key="system">System</DropdownItem>
-        <DropdownItem key="configurations">Configurations</DropdownItem>
-        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-        <DropdownItem key="logout" color="danger" className="text-danger ">
-          Log Out
+
+        <DropdownItem key="role">
+          <div className="flex justify-between w-full items-center">
+            <span>Role</span>
+            <span className="italic text-yellow-400">{role}</span>
+          </div>
         </DropdownItem>
+
         <DropdownItem key="switch">
-          <DarkModeSwitch />
+          <div className="flex justify-between w-full items-center">
+            <span>Theme Mode</span> <DarkModeSwitch />
+          </div>
+        </DropdownItem>
+
+        <DropdownItem key="logout" color="danger" className="text-danger">
+          <p className="text-center" onClick={handleLogout}>Log Out</p>
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

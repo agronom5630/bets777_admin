@@ -3,54 +3,37 @@ import React from "react";
 import { DeleteIcon } from "../icons/table/delete-icon";
 import { EditIcon } from "../icons/table/edit-icon";
 import { EyeIcon } from "../icons/table/eye-icon";
-import { users } from "./data";
+import { Player } from "@/app/types/playerTypes";
+import Avatar from "../ui/avatar";
 
 interface Props {
-  user: (typeof users)[number];
+  player: Player;
   columnKey: string | React.Key;
 }
 
-export const RenderCell = ({ user, columnKey }: Props) => {
+export const RenderCell = ({ player, columnKey}: Props, handleOpenDetails: (player: Player) => void) => {
   // @ts-ignore
-  const cellValue = user[columnKey];
+  const cellValue = player[columnKey];
   switch (columnKey) {
-    case "name":
+    case "userName":
+      const displayName = player.userName
+        ? player.userName
+        : player.firstName && player.lastName
+          ? `${player.firstName} ${player.lastName}`
+          : player.firstName || player.lastName || "No name available";
+
       return (
-        <User
-          avatarProps={{
-            src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-          }}
-          name={cellValue}
-        >
-          {user.email}
-        </User>
-      );
-    case "role":
-      return (
-        <div>
-          <div>
-            <span>{cellValue}</span>
-          </div>
-          <div>
-            <span>{user.team}</span>
-          </div>
+        <div className="flex items-center gap-2">
+          <Avatar userId={player.telegramId} />
+          <span className="text-default-900 text-xs">{displayName}</span>
         </div>
       );
-    case "status":
+
+    case "telegramId":
       return (
-        <Chip
-          size="sm"
-          variant="flat"
-          color={
-            cellValue === "active"
-              ? "success"
-              : cellValue === "paused"
-              ? "danger"
-              : "warning"
-          }
-        >
-          <span className="capitalize text-xs">{cellValue}</span>
-        </Chip>
+        <div>
+          <span className="text-success text-xs">{cellValue}</span>
+        </div>
       );
 
     case "actions":
@@ -58,23 +41,25 @@ export const RenderCell = ({ user, columnKey }: Props) => {
         <div className="flex items-center gap-4 ">
           <div>
             <Tooltip content="Details">
-              <button onClick={() => console.log("View user", user.id)}>
+              <button onClick={() => handleOpenDetails(player)}>
                 <EyeIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           </div>
+
           <div>
             <Tooltip content="Edit user" color="secondary">
-              <button onClick={() => console.log("Edit user", user.id)}>
+              <button onClick={() => console.log("Edit user")}>
                 <EditIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           </div>
+          
           <div>
             <Tooltip
               content="Delete user"
               color="danger"
-              onClick={() => console.log("Delete user", user.id)}
+              onClick={() => console.log("Delete user")}
             >
               <button>
                 <DeleteIcon size={20} fill="#FF0080" />
@@ -83,7 +68,10 @@ export const RenderCell = ({ user, columnKey }: Props) => {
           </div>
         </div>
       );
+
     default:
-      return cellValue;
+      return <div>
+        <span className="text-default-900 text-xs">{cellValue}</span>
+      </div>;
   }
 };
