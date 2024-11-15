@@ -1,4 +1,4 @@
-export const useAdminsAvatars = (role: string) => {
+export const getAdminsAvatars = (role: string) => {
     switch(role) {
         case "SUPERADMIN":
             return "/images/ninja.jpg"

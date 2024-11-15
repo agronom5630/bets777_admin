@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchAdmins } from "@/app/services/getAdmins";
 import { Spinner } from "@nextui-org/react";
 import { Admin } from "@/app/types/adminTypes";
-import { useAdminsAvatars } from "@/components/hooks/adminsAwatars";
+import { getAdminsAvatars } from "@/components/hooks/adminsAwatars";
 import formatDate from "../hooks/formatDate";
 import axios from '@/app/axiosInstance';
 
@@ -125,7 +125,7 @@ export const CardTransactions = () => {
                   <Avatar
                     isBordered={admin.isActive}
                     color="success"
-                    src={useAdminsAvatars(admin.role)}
+                    src={getAdminsAvatars(admin.role)}
                   />
                 </div>
 
